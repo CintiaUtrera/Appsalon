@@ -9,7 +9,7 @@
     }
     .imagen{
         height: 20rem;
-        background-image: url(/src/img/1.jpg);
+        background-image: url(../img/1.jpg);
         background-size: cover;
         background-position: center;
         @include m.tablet{

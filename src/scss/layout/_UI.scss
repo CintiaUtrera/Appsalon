@@ -7,4 +7,18 @@
         grid-template-columns: repeat(2, 1fr);
         min-height: 100vh;
     }
+    .imagen{
+        height: 20rem;
+        background-image: url(/src/img/1.jpg);
+        background-size: cover;
+        background-position: center;
+        @include m.tablet{
+            height: auto;
+        }
+    }
+    .app{
+        width: 95%;
+        margin: 0 auto;
+        padding: 3rem 0;
+    }
 }

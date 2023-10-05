@@ -15,7 +15,10 @@ class LoginController {
     }
 
     public static function olvide(Router $router){
-        
+
+        $router->render('auth/olvide-password', [
+
+        ]);
     }
 
     public static function recuperar(Router $router){

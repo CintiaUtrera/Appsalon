@@ -44,6 +44,11 @@ class LoginController {
                 if($resultado->num_rows){
                     $alertas = Usuario::getAlertas();
                 }else{
+                    // Hashear password
+                    $usuario->hashPassword();
+
+                    //generar token unico
+                    $usuario->crearToken();
                     
                 }
             }

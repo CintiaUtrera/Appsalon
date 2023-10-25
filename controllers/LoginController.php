@@ -8,10 +8,10 @@ use Model\Usuario;
 use UConverter;
 
 class LoginController {
+
     public static function login(Router $router){
         $alertas = [];
         
-
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $auth = new Usuario($_POST);
 
@@ -38,21 +38,19 @@ class LoginController {
                         }else {
                             header('Location: /cita');
                         }
-
                     }
                 }else {
                     Usuario::setAlerta('error', 'Usuario no encontrado');
                 }
             }
         }
-
         $alertas = Usuario::getAlertas();
-
         $router->render('auth/login', [
             'alertas' => $alertas,
             
         ]);
     }
+
 
     public static function logout(Router $router){
         
@@ -60,8 +58,18 @@ class LoginController {
 
     public static function olvide(Router $router){
 
-        $router->render('auth/olvide-password', [
+        $alertas = [];
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $auth = new Usuario($_POST);
+            $alertas = $auth->validarEmail();
 
+            if(empty($alertas)){
+                
+            }
+        }
+
+        $router->render('auth/olvide-password', [
+            'alertas' => $alertas
         ]);
     }
 

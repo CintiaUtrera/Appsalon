@@ -5,11 +5,23 @@ namespace Controllers;
 use MVC\Router;
 use Classes\Email;
 use Model\Usuario;
+use UConverter;
 
 class LoginController {
     public static function login(Router $router){
+        $alertas = [];
+        
 
-        $router->render('auth/login');
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $auth = new Usuario($_POST);
+
+            $alertas = $auth->validarLogin();
+        }
+
+        $router->render('auth/login', [
+            'alertas' => $alertas,
+            
+        ]);
     }
 
     public static function logout(Router $router){

@@ -70,7 +70,10 @@ class LoginController {
                     // Generar un token
                     $usuario->crearToken();
                     $usuario->guardar();
-                    // TODO: enviar el email
+                    // Enviar el email
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarInstrucciones();
+                    // Alerta de exito
                     Usuario::setAlerta('exito', 'revisa tu email');
                     
                 } else{

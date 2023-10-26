@@ -88,9 +88,14 @@ class LoginController {
         ]);
     }
 
+
     public static function recuperar(Router $router){
         
+        $router->render('auth/recuperar-password', [
+            
+        ]);
     }
+
 
     public static function crear(Router $router){
         $usuario = new Usuario($_POST);

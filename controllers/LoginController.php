@@ -104,6 +104,8 @@ class LoginController {
         }
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // Leer el nuevo password y guardarlo
+            $password = new Usuario($_POST);
+            $alertas = $password->validarPassword();
         }
 
         $router->render('auth/recuperar-password', [

@@ -145,8 +145,14 @@ function mostrarServicios(servicios){
     });
 }
 
-function seleccionarServicio(){
+function seleccionarServicio(servicio){
+    const { id } = servicio;
     const { servicios } = cita;
 
     cita.servicios = [...servicios, servicios]; // ...servicios copia del arreglo de servicio
+
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+    divServicio.classList.add('seleccionado');
+    
+
 }

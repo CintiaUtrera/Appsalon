@@ -25,6 +25,8 @@ function iniciarApp(){
     nombreCliente(); // añade el nombre del cliente al objeto cita
     seleccionarFecha(); // añade la fecha de la cita en el objeto
     seleccionarHora(); // añade la hora de la cita en el objeto
+
+    mostrarResumen();
 }
 
 function mostrarSeccion() {
@@ -60,6 +62,8 @@ function tabs(){
 
             mostrarSeccion();
             botonesPaginador();
+
+            
         });
     })
 }
@@ -76,6 +80,7 @@ function botonesPaginador(){
     } else if(paso === 3){
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
+        mostrarResumen();
     } else{
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
@@ -222,3 +227,12 @@ function mostrarAlerta(mensaje, tipo){
     }, 3000);
 }
 
+function mostrarResumen(){
+    const resumen = document.querySelector('.contenido-resumen');
+
+    if(Object.values(cita).includes('')){
+
+    } else {
+
+    }
+}

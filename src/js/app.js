@@ -91,7 +91,7 @@ function botonesPaginador(){
 
 
 function paginaAnterior(){
-    const paginaAnterior = document.querySelector('#anterior');
+    const paginaAnterior = document.querySelector("#anterior");
     paginaAnterior.addEventListener('click', function(){
         if(paso <= pasoInicial) return;
         
@@ -103,7 +103,7 @@ function paginaAnterior(){
 
 
 function paginaSiguiente (){
-    const paginaSiguiente = document.querySelector('#siguiente');
+    const paginaSiguiente = document.querySelector("#siguiente");
     paginaSiguiente.addEventListener('click', function(){
         if(paso >= pasoFinal) return;
         
@@ -122,22 +122,22 @@ async function consultarAPI(){
         mostrarServicios(servicios);
         
     } catch (error){
-        console.log(error);
+        
     }
 }
 
 function mostrarServicios(servicios){
 
     servicios.forEach( servicio => {
-        const {id, nombre, precio} = servicio;
+        const { id, nombre, precio } = servicio;
 
         const nombreServicio = document.createElement('P');
         nombreServicio.classList.add('nombre-servicio');
         nombreServicio.textContent = nombre;
 
         const precioServicio = document.createElement('P');
-        precioServicio.textContent = `$${precio}`;
         precioServicio.classList.add('precio-servicio');
+        precioServicio.textContent = `$${precio}`;
 
         const servicioDiv = document.createElement('DIV');
         servicioDiv.classList.add('servicio');
@@ -182,11 +182,11 @@ function nombreCliente(){
 function seleccionarFecha(){
     const inputFecha = document.querySelector('#fecha');
     inputFecha.addEventListener('input', function(e) {
-        const dia = new Date(e.target.value).getUTCDay();
+        const dia = new Date(e.target.value).getUTCDate();
 
         if([6, 0].includes(dia)){
             e.target.value = '';
-            mostrarAlerta('Fines de semana no permitidos', 'error');
+            mostrarAlerta('Fines de semana no permitidos', 'error', '.formulario');
         } else{
             cita.fecha = e.target.value;
         }
@@ -200,17 +200,19 @@ function seleccionarHora(){
         const hora = horaCita.split(":")[0];
         if(hora < 9 || hora > 18){
             e.target.value = '';
-            mostrarAlerta('hora no válida', 'error');
+            mostrarAlerta('hora no válida', 'error', '.formulario');
         } else {
             cita.hora = e.target.value;
         }
     });
 }
 
-function mostrarAlerta(mensaje, tipo){
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true){
     // Previene que se generen mas de una alerta
     const alertaPrevia = document.querySelector('.alerta');
-    if(alertaPrevia) return;
+    if(alertaPrevia) {
+        alertaPrevia.remove();
+    };
 
     // Scripting para crear la alerta
     const alerta = document.createElement('DIV');
@@ -218,21 +220,23 @@ function mostrarAlerta(mensaje, tipo){
     alerta.classList.add('alerta');
     alerta.classList.add(tipo);
 
-    const formulario = document.querySelector('.formulario');
-    formulario.appendChild(alerta);
+    const referencia = document.querySelector(elemento);
+    referencia.appendChild(alerta);
 
-    // Eliminar la alerta
-    setTimeout(() => {
-        alerta.remove();
-    }, 3000);
+    if(desaparece){
+        // Eliminar la alerta
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000);
+    }
 }
 
 function mostrarResumen(){
     const resumen = document.querySelector('.contenido-resumen');
 
-    if(Object.values(cita).includes('')){
-
+    if(Object.values(cita).includes('') || cita.servicios.length === 0){
+        mostrarAlerta('faltan datos de servicios, fecha u hora', 'error', '.contenido-resumen', false);
     } else {
-
+        console.log('todo bien');
     }
 }

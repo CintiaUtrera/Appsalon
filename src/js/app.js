@@ -281,6 +281,16 @@ function mostrarResumen(){
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
 
+    // formatear la fecha en español
+    const fechaObj = new Date(fecha);
+    const mes = fechaObj.getMonth();
+    const dia = fechaObj.getDate() + 2;
+    const year = fechaObj.getFullYear();
+
+    const fechaUTC = new Date( Date.UTC(year, mes, dia));
+
+    const fechaFormateada  = fechaUTC
+
     const fechaCita = document.createElement('P');
     fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`;
 

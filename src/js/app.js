@@ -256,7 +256,7 @@ function mostrarResumen(){
     resumen.appendChild(headingServicios);
 
     servicios.forEach(servicio => {
-        const { precio, nombre } = servicio;
+        const { id, precio, nombre } = servicio;
 
         const contenedorServicio = document.createElement('DIV');
         contenedorServicio.classList.add('contenedor-servicio');
@@ -295,13 +295,23 @@ function mostrarResumen(){
 
     const fechaCita = document.createElement('P');
     fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
-    
 
     const horaCita = document.createElement('P');
     horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`;
 
+    // Boton para crear una cita
+    const botonReservar = document.createElement('BUTTON');
+    botonReservar.classList.add('boton');
+    botonReservar.textContent = 'Reservar Cita';
+    botonReservar.onclick = reservarCita;
+
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCita);
     resumen.appendChild(horaCita);
+    
+    resumen.appendChild(botonReservar);
+}
 
+function reservarCita(){
+    console.log('Reservar cita');
 }

@@ -198,6 +198,7 @@ function seleccionarHora(){
     inputHora.addEventListener('input', function(e) {
         const horaCita = e.target.value;
         const hora = horaCita.split(":")[0];
+
         if(hora < 9 || hora > 18){
             e.target.value = '';
             mostrarAlerta('hora no válida', 'error', '.formulario');
@@ -212,7 +213,7 @@ function mostrarAlerta(mensaje, tipo, elemento, desaparece = true){
     const alertaPrevia = document.querySelector('.alerta');
     if(alertaPrevia) {
         alertaPrevia.remove();
-    };
+    }
 
     // Scripting para crear la alerta
     const alerta = document.createElement('DIV');
@@ -289,10 +290,12 @@ function mostrarResumen(){
 
     const fechaUTC = new Date( Date.UTC(year, mes, dia));
 
-    const fechaFormateada  = fechaUTC
+    const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+    const fechaFormateada  = fechaUTC.tuLocaleDateString('es-AR', opciones);
 
     const fechaCita = document.createElement('P');
-    fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`;
+    fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
+    
 
     const horaCita = document.createElement('P');
     horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`;

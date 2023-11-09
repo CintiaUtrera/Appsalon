@@ -3,6 +3,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
+    id:'',
     nombre: '',
     fecha: '',
     hora: '',
@@ -26,7 +27,7 @@ function iniciarApp(){
     seleccionarFecha(); // añade la fecha de la cita en el objeto
     seleccionarHora(); // añade la hora de la cita en el objeto
 
-    mostrarResumen();
+    mostrarResumen(); // muestra el resumen de cita
 }
 
 function mostrarSeccion() {
@@ -54,18 +55,18 @@ function mostrarSeccion() {
 
 
 function tabs(){
+    // Agrega y cambia la variable de paso según el tab seleccionado
     const botones = document.querySelectorAll('.tabs button');
 
     botones.forEach( boton => {
         boton.addEventListener('click', function(e) {
-            paso = parseInt(e.target.dataset.paso);
+            e.preventDefault();
 
+            paso = parseInt( e.target.dataset.paso );
             mostrarSeccion();
             botonesPaginador();
-
-            
         });
-    })
+    });
 }
 
 
@@ -77,7 +78,7 @@ function botonesPaginador(){
     if(paso === 1){
         paginaAnterior.classList.add('ocultar');
         paginaSiguiente.classList.remove('ocultar');
-    } else if(paso === 3){
+    } else if (paso === 3) {
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
         mostrarResumen();
@@ -93,6 +94,7 @@ function botonesPaginador(){
 function paginaAnterior(){
     const paginaAnterior = document.querySelector("#anterior");
     paginaAnterior.addEventListener('click', function(){
+
         if(paso <= pasoInicial) return;
         
         paso--;
@@ -122,7 +124,7 @@ async function consultarAPI(){
         mostrarServicios(servicios);
         
     } catch (error){
-        
+        console.log(error);
     }
 }
 
@@ -182,7 +184,7 @@ function nombreCliente(){
 function seleccionarFecha(){
     const inputFecha = document.querySelector('#fecha');
     inputFecha.addEventListener('input', function(e) {
-        const dia = new Date(e.target.value).getUTCDate();
+        const dia = new Date(e.target.value).getUTCDay();
 
         if([6, 0].includes(dia)){
             e.target.value = '';
@@ -196,6 +198,7 @@ function seleccionarFecha(){
 function seleccionarHora(){
     const inputHora = document.querySelector('#hora');
     inputHora.addEventListener('input', function(e) {
+
         const horaCita = e.target.value;
         const hora = horaCita.split(":")[0];
 
@@ -241,7 +244,7 @@ function mostrarResumen(){
     }
     
 
-    if(Object.values(cita).includes('') || cita.servicios.length === 0){
+    if(Object.values(cita).includes('') || cita.servicios.length === 0 ){
         mostrarAlerta('faltan datos de servicios, fecha u hora', 'error', '.contenido-resumen', false);
     
         return;
@@ -291,7 +294,7 @@ function mostrarResumen(){
     const fechaUTC = new Date( Date.UTC(year, mes, dia));
 
     const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-    const fechaFormateada  = fechaUTC.tuLocaleDateString('es-AR', opciones);
+    const fechaFormateada  = fechaUTC.toLocaleDateString('es-AR', opciones);
 
     const fechaCita = document.createElement('P');
     fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;

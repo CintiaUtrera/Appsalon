@@ -316,5 +316,7 @@ function mostrarResumen(){
 }
 
 function reservarCita(){
-    console.log('Reservar cita');
+    const datos = new FormData();
+    datos.append('nombre', 'cintia');
+
 }

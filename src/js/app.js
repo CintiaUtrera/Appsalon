@@ -319,4 +319,13 @@ function reservarCita(){
     const datos = new FormData();
     datos.append('nombre', 'cintia');
 
+    // Peticion hacia la api
+    const url = 'http://localhost:3000/api/citas'
+
+    const respuesta = await fetch(url, {
+        method: 'POST'
+    });
+
+    const resultado = await respuesta.json();
+
 }

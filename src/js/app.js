@@ -3,7 +3,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
-    id:'',
+    id: 1,
     nombre: '',
     fecha: '',
     hora: '',
@@ -315,7 +315,7 @@ function mostrarResumen(){
     resumen.appendChild(botonReservar);
 }
 
-function reservarCita(){
+async function reservarCita(){
     const datos = new FormData();
     datos.append('nombre', 'cintia');
 

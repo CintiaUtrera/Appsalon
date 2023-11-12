@@ -29,8 +29,8 @@
                 <input id="fecha" type="date" min="<?php echo date('Y-m-d', strtotime('+1 day') ); ?>"  />
             </div>
             <div class="campo">
-                <label for="Hora">Hora</label>
-                <input id="Hora" type="time" />
+                <label for="hora">Hora</label>
+                <input id="hora" type="time" />
             </div>
         </form>
     </div>

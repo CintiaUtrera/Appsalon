@@ -332,7 +332,8 @@ async function reservarCita(){
     datos.append('hora', hora);
     datos.append('servicios', idServicios);
 
-    // Peticion hacia la api
+    try {
+        // Peticion hacia la api
     const url = 'http://localhost:3000/api/citas'
 
     const respuesta = await fetch(url, {
@@ -342,4 +343,26 @@ async function reservarCita(){
 
     const resultado = await respuesta.json();
 
+    if(resultado.resultado){
+        Swal.fire({
+            icon: "success",
+            title: "Cita Creada",
+            text: "Tu cita fue creada correctamente",
+            button: 'Ok'
+        }).then(() => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+            
+        })
+    }
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un error al guardar la cita"
+        });
+    }
+
+    
 }

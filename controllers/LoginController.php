@@ -5,7 +5,7 @@ namespace Controllers;
 use MVC\Router;
 use Classes\Email;
 use Model\Usuario;
-use UConverter;
+
 
 class LoginController {
 
@@ -134,7 +134,7 @@ class LoginController {
 
 
     public static function crear(Router $router){
-        $usuario = new Usuario($_POST);
+        $usuario = new Usuario;
 
         // Alertas vacias
         $alertas = [];
@@ -187,13 +187,13 @@ class LoginController {
 
         $usuario = Usuario::where('token', $token);
 
-        if(empty($usuario) || $usuario->token === ''){
+        if(empty($usuario)){
             // mostrar mensaje de error
             Usuario::setAlerta('error', 'Token no Válido');
         }else {
             // modificar a usuario confirmado
             $usuario->confirmado = '1';
-            $usuario->token = '';
+            $usuario->token = null;
             $usuario->guardar();
             Usuario::setAlerta('exito', 'Cuenta Comprobada Correctamente');
         }

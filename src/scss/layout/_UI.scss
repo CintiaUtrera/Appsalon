@@ -22,3 +22,18 @@
         padding: 3rem 0;
     }
 }
+
+.barra{
+    margin: 2rem;
+
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .boton {
+        @include m.boton(v.$negro, v.$blanco);
+        margin: 0;
+    }
+    
+}

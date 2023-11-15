@@ -26,17 +26,13 @@ class APIController{
         foreach($idServicios as $idServicio){
             $args = [
                 'citaId' => $id,
-                'serviciosId' => $idServicio
+                'servicioId' => $idServicio
             ];
 
             $citaServicio = new CitaServicio($args);
             $citaServicio->guardar();
         }
 
-        $respuesta = [
-            'resultado' => $resultado
-        ];
-
-        echo json_encode($respuesta);
+        echo json_encode(['resultado' => $resultado]);
     }
 }

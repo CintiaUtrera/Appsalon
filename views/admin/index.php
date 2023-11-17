@@ -33,7 +33,7 @@
             
             <?php } //fin del if ?>
             <p class="servicio"><?php echo $cita->servicio . " " . $cita->precio; ?></p>
-        </li>
+        
         <?php } //fin del foreach ?>
     </ul>
 </div>

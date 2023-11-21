@@ -42,13 +42,23 @@ class ServicioController {
     ]);
     }
 
+
     public static function actualizar(Router $router){
+        session_start();
         
+        $id = is_numeric($_GET['id']);
+        if(!$id) return;
+        $servicio = Servicio::find($id);
+        $alertas = [];
+
 
         $router->render('servicios/actualizar',[
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            'alertas' => $alertas
     ]);
     }
+
 
     public static function eliminar(Router $router){
         

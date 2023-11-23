@@ -33,9 +33,9 @@ function css() {
 
 function javascript() {
     return src(paths.js)
-      .pipe(terser())
-      .pipe(sourcemaps.write('.'))
-      .pipe(dest('public/build/js'));
+    .pipe(terser())
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('public/build/js'));
 }
 
 function imagenes() {
@@ -59,7 +59,8 @@ function watchArchivos() {
     watch( paths.imagenes, imagenes );
     watch( paths.imagenes, versionWebp );
 }
-  
+
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript,  imagenes, versionWebp,  watchArchivos ); 
+exports.build = parallel(css, javascript,  imagenes, versionWebp );
